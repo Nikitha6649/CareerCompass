@@ -18,7 +18,7 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 
 # Configure Gemini AI with the correct API key and model
-GEMINI_API_KEY = "AIzaSyC0My7gixXlnb-60LTPOxzn3rA3tq_c9nM"
+GEMINI_API_KEY = "Your API KEY"
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Set default model to the latest available Gemini model
