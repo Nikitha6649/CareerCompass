@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Course Suggester - CareerCompass{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="form-card">
+        <div class="card-header">
+            <i class="fas fa-graduation-cap"></i>
+            <h2>AI Course Suggester</h2>
+            <p>Tell us about your learning preferences and goals. Our AI will search current course offerings and suggest the best matches for your unique profile.</p>
+        </div>
+
+        <form id="courseForm" class="recommendation-form">
+            <div class="form-section">
+                <h3>Your Learning Preferences (select multiple)</h3>
+                <div class="checkbox-grid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="learning_preferences" value="Online learning">
+                        <span>Online learning</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="learning_preferences" value="Hands-on projects">
+                        <span>Hands-on projects</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="learning_preferences" value="Instructor-led sessions">
+                        <span>Instructor-led sessions</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="learning_preferences" value="Self-paced modules">
+                        <span>Self-paced modules</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="learning_preferences" value="Focus on theory">
+                        <span>Focus on theory</span>
+                    </label>
+                </div>
+                <p class="validation-message" id="learningError">Please select at least one preference.</p>
+            </div>
+
+            <div class="form-section">
+                <h3>Your Educational Background (select multiple)</h3>
+                <div class="checkbox-grid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="High School Diploma / Equivalent">
+                        <span>High School Diploma / Equivalent</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="Some College (No Degree)">
+                        <span>Some College (No Degree)</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="Vocational/Technical Certificate">
+                        <span>Vocational/Technical Certificate</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="Associate Degree">
+                        <span>Associate Degree</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="Bachelor's in Computer Science">
+                        <span>Bachelor's in Computer Science</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="Bachelor's in Business">
+                        <span>Bachelor's in Business</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="educational_background" value="Master's Degree">
+                        <span>Master's Degree</span>
+                    </label>
+                </div>
+                <p class="validation-message" id="educationError">Please select at least one background option.</p>
+            </div>
+
+            <div class="form-section">
+                <h3>Your Career Aspirations (select multiple)</h3>
+                <div class="checkbox-grid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="career_aspirations" value="Become a Software Engineer">
+                        <span>Become a Software Engineer</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="career_aspirations" value="Become a Product Manager">
+                        <span>Become a Product Manager</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="career_aspirations" value="Transition to Data Science">
+                        <span>Transition to Data Science</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="career_aspirations" value="Start my own business">
+                        <span>Start my own business</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="career_aspirations" value="Move into Management/Leadership">
+                        <span>Move into Management/Leadership</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="career_aspirations" value="Become a Digital Marketer">
+                        <span>Become a Digital Marketer</span>
+                    </label>
+                </div>
+                <p class="validation-message" id="aspirationsError">Please select at least one aspiration.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large">
+                <i class="fas fa-lightbulb"></i>
+                Suggest Courses
+            </button>
+        </form>
+    </div>
+
+    <div id="resultsSection" class="results-section" style="display: none;">
+        <h2>AI Course Suggestions</h2>
+        <div id="courseResults" class="results-grid"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/course-suggester.js') }}"></script>
+{% endblock %}

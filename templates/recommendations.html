@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block title %}AI-Powered Recommendations - CareerCompass{% endblock %}
+
+{% block content %}
+<div class="recommendations-container">
+    <div class="recommendations-header">
+        <h1>Your AI-Powered Recommendations</h1>
+        <p>Advanced machine learning and Gemini AI provide personalized career guidance</p>
+        <div class="ai-badges">
+            <span class="ai-badge"><i class="fas fa-robot"></i> Gemini AI</span>
+            <span class="ai-badge"><i class="fas fa-brain"></i> Deep Learning</span>
+            <span class="ai-badge"><i class="fas fa-chart-network"></i> Hybrid ML</span>
+        </div>
+    </div>
+
+    <div class="recommendations-tabs">
+        <button class="tab-button active" data-tab="courses">
+            <i class="fas fa-graduation-cap"></i>
+            Courses
+            <span class="count">{{ courses|length }}</span>
+        </button>
+        <button class="tab-button" data-tab="certificates">
+            <i class="fas fa-certificate"></i>
+            Certificates
+            <span class="count">{{ certificates|length }}</span>
+        </button>
+        <button class="tab-button" data-tab="jobs">
+            <i class="fas fa-briefcase"></i>
+            Jobs
+            <span class="count">{{ jobs|length }}</span>
+        </button>
+        <button class="tab-button" data-tab="career-paths">
+            <i class="fas fa-route"></i>
+            Career Paths
+            <span class="count">{{ career_paths|length }}</span>
+        </button>
+    </div>
+
+    <!-- AI Insights Panel -->
+    <div class="ai-insights-panel">
+        <h3><i class="fas fa-lightbulb"></i> AI Insights</h3>
+        <div id="aiInsights">
+            <p>Select a recommendation type to see AI-powered insights...</p>
+        </div>
+    </div>
+
+    <div class="tab-content active" id="courses-tab">
+        <div class="section-header">
+            <h2>Recommended Courses</h2>
+            <div class="filter-controls">
+                <select id="difficultyFilter">
+                    <option value="">All Difficulties</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Cloud Computing">Cloud Computing</option>
+                </select>
+            </div>
+        </div>
+        <div class="recommendations-grid" id="coursesGrid">
+            {% for course in courses %}
+            <div class="recommendation-card enhanced" data-difficulty="{{ course.difficulty }}" data-category="{{ course.category }}">
+                <div class="card-header">
+                    <h3>{{ course.title }}</h3>
+                    <div class="provider-rating">
+                        <span class="provider">{{ course.provider }}</span>
+                        {% if course.rating %}
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-value">{{ course.rating }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>{{ course.description }}</p>
+                    <div class="card-meta">
+                        <span class="difficulty difficulty-{{ course.difficulty.lower() }}">{{ course.difficulty }}</span>
+                        <span class="duration"><i class="fas fa-clock"></i> {{ course.duration }}</span>
+                        {% if course.price %}
+                        <span class="price"><i class="fas fa-tag"></i> {{ course.price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="skills-tags">
+                        {% for skill in course.skills_taught.split(', ') %}
+                        <span class="skill-tag">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="{{ course.url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Course
+                    </a>
+                    <button class="btn btn-secondary track-btn" data-type="course" data-id="{{ course.id }}">
+                        <i class="fas fa-heart"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="tab-content" id="certificates-tab">
+        <div class="section-header">
+            <h2>Recommended Certificates</h2>
+        </div>
+        <div class="recommendations-grid" id="certificatesGrid">
+            {% for cert in certificates %}
+            <div class="recommendation-card enhanced">
+                <div class="card-header">
+                    <h3>{{ cert.name }}</h3>
+                    <div class="provider-rating">
+                        <span class="provider">{{ cert.provider }}</span>
+                        <span class="industry-tag">{{ cert.industry }}</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>{{ cert.description }}</p>
+                    <div class="cert-details">
+                        <div class="detail-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Cost: {{ cert.cost }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Valid: {{ cert.validity_period }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Level: {{ cert.difficulty }}</span>
+                        </div>
+                    </div>
+                    <div class="skills-tags">
+                        {% for skill in cert.skills_required.split(', ') %}
+                        <span class="skill-tag">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="career-paths">
+                        <strong>Career Paths:</strong> {{ cert.career_paths }}
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="{{ cert.url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-certificate"></i>
+                        Learn More
+                    </a>
+                    <button class="btn btn-secondary track-btn" data-type="certificate" data-id="{{ cert.id }}">
+                        <i class="fas fa-bookmark"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="tab-content" id="jobs-tab">
+        <div class="section-header">
+            <h2>Job Opportunities</h2>
+            <div class="filter-controls">
+                <select id="experienceFilter">
+                    <option value="">All Experience Levels</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Mid-level">Mid-level</option>
+                    <option value="Senior">Senior</option>
+                </select>
+                <select id="remoteFilter">
+                    <option value="">All Locations</option>
+                    <option value="true">Remote Available</option>
+                    <option value="false">On-site Only</option>
+                </select>
+            </div>
+        </div>
+        <div class="recommendations-grid" id="jobsGrid">
+            {% for job in jobs %}
+            <div class="recommendation-card enhanced" data-experience="{{ job.experience_level }}" data-remote="{{ job.remote_option }}">
+                <div class="card-header">
+                    <h3>{{ job.title }}</h3>
+                    <div class="provider-rating">
+                        <span class="provider">{{ job.company }}</span>
+                        {% if job.remote_option %}
+                        <span class="remote-badge"><i class="fas fa-home"></i> Remote</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>{{ job.description }}</p>
+                    <div class="job-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ job.location }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>{{ job.experience_level }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>{{ job.salary_range }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-industry"></i>
+                            <span>{{ job.industry }}</span>
+                        </div>
+                    </div>
+                    <div class="skills-tags">
+                        {% for skill in job.required_skills.split(', ') %}
+                        <span class="skill-tag">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="{{ job.url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Apply Now
+                    </a>
+                    <button class="btn btn-secondary track-btn" data-type="job" data-id="{{ job.id }}">
+                        <i class="fas fa-star"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="tab-content" id="career-paths-tab">
+        <div class="section-header">
+            <h2>Predicted Career Paths</h2>
+            <p class="section-subtitle">AI-powered career path predictions based on your profile</p>
+        </div>
+        <div class="career-paths-grid">
+            {% for path in career_paths %}
+            <div class="career-path-card">
+                <div class="path-header">
+                    <h3>{{ path.name }}</h3>
+                    <div class="growth-indicator">
+                        <span class="growth-rate">{{ path.growth_rate }} growth</span>
+                    </div>
+                </div>
+                <div class="path-content">
+                    <p>{{ path.description }}</p>
+                    <div class="path-details">
+                        <div class="detail-row">
+                            <strong>Average Salary:</strong> {{ path.average_salary }}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Industry:</strong> {{ path.industry }}
+                        </div>
+                    </div>
+                    <div class="skills-required">
+                        <strong>Required Skills:</strong>
+                        <div class="skills-tags">
+                            {% for skill in path.required_skills.split(', ') %}
+                            <span class="skill-tag">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="path-actions">
+                    <button class="btn btn-primary explore-path" data-path="{{ path.name }}">
+                        <i class="fas fa-route"></i>
+                        Explore Path
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/recommendations.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Certificate Finder - CareerCompass{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="form-card">
+        <div class="card-header">
+            <i class="fas fa-certificate"></i>
+            <h2>AI Certificate Finder (India Focus)</h2>
+            <p>Select your interests and goals. Our AI will analyze current market offerings and recommend real, available certificates with personalized relevance scores.</p>
+        </div>
+
+        <form id="certificateForm" class="recommendation-form">
+            <div class="form-section">
+                <h3>Your Interests (select multiple)</h3>
+                <div class="checkbox-grid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="AI & Machine Learning">
+                        <span>AI & Machine Learning</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Project Management">
+                        <span>Project Management</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Leadership & Management">
+                        <span>Leadership & Management</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Web Development (Frontend)">
+                        <span>Web Development (Frontend)</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Web Development (Backend)">
+                        <span>Web Development (Backend)</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Data Science & Analytics">
+                        <span>Data Science & Analytics</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Digital Marketing">
+                        <span>Digital Marketing</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="interests" value="Cloud Computing">
+                        <span>Cloud Computing</span>
+                    </label>
+                </div>
+                <p class="validation-message" id="interestsError">Please select at least one interest.</p>
+            </div>
+
+            <div class="form-section">
+                <h3>Your Goals (select multiple)</h3>
+                <div class="checkbox-grid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="goals" value="Get a Promotion">
+                        <span>Get a Promotion</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="goals" value="Change Careers">
+                        <span>Change Careers</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="goals" value="Learn New Skills">
+                        <span>Learn New Skills</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="goals" value="Start a Business">
+                        <span>Start a Business</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="goals" value="Specialize in a Niche">
+                        <span>Specialize in a Niche</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="goals" value="Increase Salary">
+                        <span>Increase Salary</span>
+                    </label>
+                </div>
+                <p class="validation-message" id="goalsError">Please select at least one goal.</p>
+            </div>
+
+            <div class="form-section">
+                <h3>Course Preference</h3>
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input type="radio" name="course_preference" value="Any" checked>
+                        <span>Any</span>
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="course_preference" value="Paid">
+                        <span>Paid</span>
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="course_preference" value="Free">
+                        <span>Free</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large">
+                <i class="fas fa-search"></i>
+                Find Certificates
+            </button>
+        </form>
+    </div>
+
+    <div id="resultsSection" class="results-section" style="display: none;">
+        <h2>AI Recommendations</h2>
+        <div id="certificateResults" class="results-grid"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/certificate-finder.js') }}"></script>
+{% endblock %}

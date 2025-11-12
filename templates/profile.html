@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - CareerCompass{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-header-content">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">Manage Your Profile</h1>
+                <p class="profile-email">Keep your information up to date to get the best recommendations from CareerCompass.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-card">
+            <form id="profileForm" class="profile-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="e.g., Alex Johnson" value="{{ user.name or '' }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" value="{{ user.email or '' }}" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="education">Educational Background</label>
+                    <textarea id="education" name="education" rows="4" placeholder="e.g., B.S. in Computer Science from XYZ University, Online certifications in...">{{ user.education or '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills & Interests</label>
+                    <textarea id="skills" name="skills" rows="4" placeholder="e.g., Python, JavaScript, Data Analysis, Graphic Design, Public Speaking">{{ user.skills or '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="aspirations">Career Aspirations</label>
+                    <textarea id="aspirations" name="aspirations" rows="4" placeholder="e.g., To become a senior software architect, To lead a marketing team, To transition into UX design">{{ user.aspirations or '' }}</textarea>
+                </div>
+
+                <button type="submit" class="profile-save-btn">
+                    <i class="fas fa-save"></i>
+                    Save Profile
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}
