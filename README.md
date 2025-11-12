@@ -293,3 +293,7 @@ For technical support or feature requests:
 ---
 
 **CareerCompass** - Navigate your career with AI-powered intelligence! 🧭✨
+
+
+Add your AI API key in
+base.html in line 28 and in app.py line 21
