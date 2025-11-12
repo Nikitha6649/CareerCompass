@@ -7,7 +7,7 @@ CareerCompass is a comprehensive AI-powered career guidance platform that helps 
 ## 🚀 Key Features
 
 ### 1. **AI Certificate Finder**
-- **Real-time AI Analysis**: Uses Gemini 1.5 Flash to analyze user interests and goals
+- **Real-time AI Analysis**: Uses Gemini 2.5 Flash to analyze user interests and goals
 - **Personalized Recommendations**: Provides 6-8 certificates tailored to user profile
 - **Current Market Data**: Recommends actually available certificates from reputable providers
 - **Relevance Scoring**: Each recommendation includes a relevance score (75-98%)
@@ -169,7 +169,7 @@ pip install -r requirements.txt
 
 ### 5. Environment Configuration
 The application uses the following configurations:
-- **Gemini API Key**: `AIzaSyCFDZKhZ0GtFmls-qIT9HICix6j09GOUFg`
+- **Gemini API Key**: 
 - **Firebase Config**: Pre-configured in `base.html`
 - **Flask Secret Key**: Set in `app.py`
 
